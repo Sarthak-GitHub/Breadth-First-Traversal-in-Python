@@ -1,0 +1,115 @@
+#1st input
+class myQueue:
+    
+    def __init__(self):
+        """
+        Create a new queue.   
+        """
+        self.items = []
+
+    def isEmpty(self):
+        """
+        Returns true if queue is empty .  
+        """
+        return self.items == []
+
+    def enqueue(self, item):
+        """
+        Add a new element to the end of queue.
+        """
+        self.items.insert(0,item)
+
+    def dequeue(self):
+        """
+        Remove a element from the beginning of queue.
+        """
+        return self.items.pop()
+
+    def size(self):
+        """
+        Returns the size of the queue.   
+        """
+        return len(self.items)
+    
+    def peek(self):
+        """
+       Have a look at first element of the queue.   
+        """
+        if self.isEmpty():
+            raise Exception("Nothing to peek")
+       
+        return self.items[len(self.items)-1]
+    
+ #2nd input
+    
+    class Node:
+
+    def __init__(self, data):
+        self.left = None
+        self.right = None
+        self.data = data
+        
+    def getLeftChild(self):
+        return self.left
+    
+    def setLeftChild(self,left):
+        self.left = left
+    
+    def getRightChild(self):
+        return self.right
+    
+    def setRightChild(self,right):
+        self.right = right
+    
+    def setNodeValue(self,value):
+        self.data = value
+        
+    def getNodeValue(self):
+        return self.data
+        
+ #3rd input    
+ 
+ def breadthFirst(node):
+        
+    if(node.data == None):
+        raise Exception("No root found!") 
+    path = ""    
+    queue = myQueue()
+    queue.enqueue(node)   
+    
+    while queue.size() > 0:        
+        current = queue.dequeue()       
+        path += str(current.data) + " "               
+        if current.getLeftChild()!= None:
+            queue.enqueue(current.getLeftChild())            
+        if current.getRightChild()!= None:
+            queue.enqueue(current.getRightChild())
+            
+    return path
+    
+#4th Input
+    
+a = Node("A")
+b = Node('B')
+c = Node('C')
+d = Node('D')
+e = Node('E')
+f = Node('F')
+g = Node('G')
+h = Node('H')
+x = Node('X')
+
+#5th input
+
+a.setLeftChild(b)
+a.setRightChild(c)
+c.setLeftChild(d)
+c.setRightChild(e)
+d.setLeftChild(f)
+d.setRightChild(h)
+e.setRightChild(g)
+b.setLeftChild(x)
+
+#6th input
+
+breadthFirst(a)
